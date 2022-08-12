@@ -32,6 +32,8 @@ Forced-alignment is introduced to capture the words present inside the audio fil
 The [Penn Phonetics Lab Forced Aligner](https://babel.ling.upenn.edu/phonetics/old_website_2015/p2fa/index.html) is used to accomplish the task of forced-alignment.
 
 1. Run alignment: `run_align.py`
+To run the forced aligner, [HTK](https://htk.eng.cam.ac.uk/) toolkit is be required to be setup. 
+
 2. Segment paragraphs into words: `wav_splitter.py`. This files extract start and end of words and segments the audio file into small .wav files with the audio for each word in the transcript separated.
 
 ### 3: MFCC generation
