@@ -9,16 +9,17 @@ An acoustic-based method that can be used to calculate the distance between pron
  - FAVE
  - R
 
-## Getting Started
-    git clone https://github.com/Bartelds/acoustic-distance-measure.git
 
-## Data
-Identifiers of the audio samples used can be found in `Audio`
 
-Data source: http://accent.gmu.edu/browse_language.php
+
 
 ## Usage
-Before the distances can be computed, the input data must be preprocessed once (step 1:4). This can be done by adhering to the following procedure:
+
+### 1: Audio
+Keep the audio samples in `Audio`. A good data source: http://accent.gmu.edu/browse_language.php
+
+1. The input audio must be in a .wav file format. Resample all audio files to 16 KHz mono PCM for calculating distance between the pronunciation. Run `resample.py`
+2. Maintain a transcript file in .txt format that contains all the words spoken in the audio samples.
 
 ### 1: Forced-alignment
 **Input:** audio files
@@ -30,25 +31,21 @@ Before the distances can be computed, the input data must be preprocessed once (
 Forced-alignment is introduced to capture the words present inside the audio files.
 The [Penn Phonetics Lab Forced Aligner](https://babel.ling.upenn.edu/phonetics/old_website_2015/p2fa/index.html) is used to accomplish the task of forced-alignment.
 
-1. Resample all audio files to 16 KHz mono PCM.
-2. Create a transcript file that contains all the words spoken in the audio samples.
-3. Run alignment: `fa.sh`
-4. Extract start and end of words: `extract_fa.praat`
-5. Segment paragraphs into words: `wavsplitter.py`
+1. Run alignment: `run_align.py`
+2. Segment paragraphs into words: `wav_splitter.py`. This files extract start and end of words and segments the audio file into small .wav files with the audio for each word in the transcript separated.
 
 ### 2: MFCC generation
 Generate MFCCs.
 
     MFCC
 
-1. Generate .scp listing that suits your data: `example_hcopy.scp`
-2. Use `config.txt` with HTK parameters. 
-3. Generate MFCCs: `HCopy -T 1 -C config -S example_hcopy.scp`
-4. HTK compressed format should be exported: `./exporthtk.sh`
+1. Generate MFCCs: `HCopy -T 1 -C config -S mfc_map.scp` Using `config.txt` with HTK parameters. 
+2. HTK compressed format should be exported: `export_hlist.py`
+
 
 ### 3: Acoustic-based distance calculation
 Distances are calculated using Dynamic Time Warping.
 
     DTW
 
-1. `dtw.R` computes the distances (includes normalization).
+1. `find_dtw.py` computes the distances (includes normalization).
