@@ -21,7 +21,7 @@ Keep the audio samples in `Audio`. A good data source: http://accent.gmu.edu/bro
 1. The input audio must be in a .wav file format. Resample all audio files to 16 KHz mono PCM for calculating distance between the pronunciation. Run `resample.py`
 2. Maintain a transcript file in .txt format that contains all the words spoken in the audio samples.
 
-### 1: Forced-alignment
+### 2: Forced-alignment
 **Input:** audio files
 
 **Output:** aligned .TextGrid files
@@ -34,7 +34,7 @@ The [Penn Phonetics Lab Forced Aligner](https://babel.ling.upenn.edu/phonetics/o
 1. Run alignment: `run_align.py`
 2. Segment paragraphs into words: `wav_splitter.py`. This files extract start and end of words and segments the audio file into small .wav files with the audio for each word in the transcript separated.
 
-### 2: MFCC generation
+### 3: MFCC generation
 Generate MFCCs.
 
     MFCC
@@ -43,7 +43,7 @@ Generate MFCCs.
 2. HTK compressed format should be exported: `export_hlist.py`
 
 
-### 3: Acoustic-based distance calculation
+### 4: Acoustic-based distance calculation
 Distances are calculated using Dynamic Time Warping.
 
     DTW
